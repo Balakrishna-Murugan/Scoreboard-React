@@ -1,0 +1,90 @@
+/* .container
+{
+    background-color: rgb(124, 126, 111);
+    height: auto;
+    border: 1px solid black;
+    display: flex;
+    height: 100vh;
+} */
+/* .body
+{
+    height: 90vh;
+    display: flex;
+} */
+
+.custom-button {
+    background-color: white; /* Set initial background color */
+    color: black; /* Set text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Adjust padding as needed */
+    cursor: pointer; /* Set cursor to pointer */
+    transition: background-color 0.3s; /* Smooth transition for background color change */
+}
+
+.custom-button:hover {
+    background-color: black; /* Change background color on hover */
+    color: white; /* Change text color on hover */
+}
+.link-span {
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.link-span:hover {
+    color: #0056b3;
+}
+#login-button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#login-button:hover {
+    background-color: #3d13b9; /* Change to a darker color on hover */
+}
+.login-form
+{
+    padding: 5px;
+}
+.main-container
+{
+   /* background-color: rgb(124, 126, 111);
+     height: 100vh; 
+    border: 1px solid black;*/
+    padding: 5px;
+}
+.flex-container {
+    display: flex; /* Set the container to use Flexbox */
+    flex-wrap: wrap; /* Allow items to wrap to the next row if needed */
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 5px;
+    /* width: 100%; */
+}
+
+.grid-item {
+    flex: 1 0 30%; /* Set the flex property to allow items to grow and shrink, with a basis of 30% */
+    margin: 10px; /* Add margin around each grid item */
+   /* background-color: #f0f0f0;  Add a background color */
+    border-radius: 8px; /* Add rounded corners */
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); Add a subtle shadow */
+}
+
+/* Adjust grid item width for smaller screens */
+@media (max-width: 768px) {
+    .grid-item {
+        flex-basis: 45%; /* Change the flex basis for smaller screens */
+    }
+}
+
+/* Adjust grid item width for even smaller screens */
+@media (max-width: 576px) {
+    .grid-item {
+        flex-basis: 100%; /* Change the flex basis for even smaller screens */
+    }
+}
