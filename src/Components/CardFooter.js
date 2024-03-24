@@ -1,11 +1,11 @@
 import React from "react";
 import picTemple from '../Assets/KanchipuramTemple.jpg'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Cards.css'
+import './CardFooter.css'
 function CardBroadcast()
 {
     return(
-        <div className="container">
+        <div className="p-2">
 <div className="row">
     <div className="col">
     <p className="m-3 text-info">

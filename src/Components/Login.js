@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import CardBroadcast from './Cards';
+import CardFooter from './CardFooter';
 import CardHeader from './CardHeader';
  import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
  import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
@@ -67,14 +67,14 @@ function Login() {
             </div>
             <div className='flex-container'>
                 <div className='grid-item'>
-                <div class="social-buttons">
+                <div class="p-2">
     <button onClick={() => openSocialLink('https://www.facebook.com/')} className="btn btn-primary btn-social custom-button"><FontAwesomeIcon icon={faFacebookF} /> Facebook</button>
     <button onClick={() => openSocialLink('https://twitter.com/')} class="btn btn-info btn-social custom-button"><FontAwesomeIcon icon={faTwitter} /> Twitter</button>
     <button onClick={() => openSocialLink('https://www.instagram.com/')} class="btn btn-danger btn-social custom-button"><FontAwesomeIcon icon={faInstagram} /> Instagram</button>
-</div>
+        </div>
                 </div>
             </div>
-            <div className='body'>
+           
                 <div className="flex-container">
                 <div className="grid-item">
                         {/* <div className='container'> */}
@@ -105,7 +105,7 @@ function Login() {
                                             // </div>
                                         :
                                         // <div className='col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4'>
-                                            <div className='p-3'> 
+                                            <div className='p-2'> 
                                             <form>
                                                 <div className="mb-3">
                                                     <label htmlFor="username" className="form-label">Username</label>
@@ -132,10 +132,9 @@ function Login() {
                         {/* </div> */}
                     </div>
                     <div className="grid-item">
-                    <CardBroadcast></CardBroadcast>
+                    <CardFooter></CardFooter>
                 </div>
                 </div>
-            </div>
 
             {/* <div className="flex-container">
                 <div className="grid-item">
