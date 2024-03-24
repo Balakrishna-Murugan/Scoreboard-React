@@ -1,38 +1,30 @@
-.App {
-  text-align: center;
+.flex-container {
+  display: flex; /* Set the container to use Flexbox */
+  flex-wrap: wrap; /* Allow items to wrap to the next row if needed */
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 5px;
+  /* width: 100%; */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.grid-item {
+  flex: 1 0 30%; /* Set the flex property to allow items to grow and shrink, with a basis of 30% */
+  margin: 10px; /* Add margin around each grid item */
+ /* background-color: #f0f0f0;  Add a background color */
+  border-radius: 8px; /* Add rounded corners */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); Add a subtle shadow */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* Adjust grid item width for smaller screens */
+@media (max-width: 768px) {
+  .grid-item {
+      flex-basis: 45%; /* Change the flex basis for smaller screens */
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+/* Adjust grid item width for even smaller screens */
+@media (max-width: 576px) {
+  .grid-item {
+      flex-basis: 100%; /* Change the flex basis for even smaller screens */
   }
 }

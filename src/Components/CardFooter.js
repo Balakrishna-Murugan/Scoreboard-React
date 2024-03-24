@@ -1,14 +1,17 @@
 import React from "react";
 import picTemple from '../Assets/KanchipuramTemple.jpg'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './CardFooter.css'
+import './CardFooter.css';
+import { useNavigate } from "react-router-dom";
+
 function CardBroadcast()
 {
+    
     return(
         <div className="p-2">
 <div className="row">
     <div className="col">
-    <p className="m-3 text-info">
+    <p className="text-info">
                 "The beautiful Ekambareswara temple is in the heart of Kanchipuram. At its entrance, the statue of King Karikalan welcomes you. Why is it here? Because, according to one legend, Karikalan built this temple! We do not know if the legend is true, but we do know that he was a swashbuckling hero and a master-builder."
             </p>
     </div>
