@@ -19,10 +19,19 @@
     padding: 10px 20px;/*  Adjust padding as needed */
     cursor: pointer; /* Set cursor to pointer */
     transition: background-color 0.3s; /* Smooth transition for background color change */
-    /* border: .5px solid rgb(78, 71, 71);
-    margin-right: 2px; */
+    border: .5px solid rgb(78, 71, 71);
+    margin-right: 4px;
+    position: relative;
 }
-
+.text {
+    display: inline-block;
+  }
+  
+  @media (max-width: 576px) {
+    .text {
+      display: none;
+    }
+  }
 .custom-button:hover {
     background-color: black; /* Change background color on hover */
     color: white; /* Change text color on hover */

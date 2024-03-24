@@ -89,9 +89,9 @@ function Login() {
             <div className='flex-container'>
                 <div className='grid-item'>
                     <div class="p-2">
-                        <button onClick={() => openSocialLink('facebook')} className="btn btn-primary btn-social custom-button"><FontAwesomeIcon icon={faFacebookF} /> Facebook</button>
-                        <button onClick={() => openSocialLink('twitter')} class="btn btn-info btn-social custom-button"><FontAwesomeIcon icon={faTwitter} /> Twitter</button>
-                        <button onClick={() => openSocialLink('instagram')} class="btn btn-danger btn-social custom-button"><FontAwesomeIcon icon={faInstagram} /> Instagram</button>
+                        <button onClick={() => openSocialLink('facebook')} className="btn btn-primary btn-social custom-button"><FontAwesomeIcon icon={faFacebookF} /> <span className='text'> Facebook</span></button>
+                        <button onClick={() => openSocialLink('twitter')} class="btn btn-info btn-social custom-button"><FontAwesomeIcon icon={faTwitter} /> <span className='text'> Twitter</span></button>
+                        <button onClick={() => openSocialLink('instagram')} class="btn btn-danger btn-social custom-button"><FontAwesomeIcon icon={faInstagram} /> <span className='text'> Instagram</span></button>
                     </div>
                 </div>
             </div>
