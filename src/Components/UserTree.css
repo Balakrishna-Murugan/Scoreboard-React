@@ -1,0 +1,21 @@
+.tree-node {
+    margin-bottom: 8px;
+  }
+  
+  .node-label {
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .node-label:hover {
+    background-color: #f0f0f0;
+  }
+  .tree-view_item:hover {
+    /* Add your styles here */
+    color: rgb(66, 66, 69);
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+  .tree-node.selected {
+    background-color: lightblue; /* Change this to the desired highlight color */
+}
