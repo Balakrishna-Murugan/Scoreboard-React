@@ -4,6 +4,7 @@ import CardHeader from './CardHeader';
 import { useNavigate } from "react-router-dom";
 import '../App.css';
 import UserTree from './UserTree';
+import UserTreeMUI from './TreeViewMUI';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -32,13 +33,7 @@ function Home() {
             </div>
             <div className="flex-container">
                 <div className="grid-item">
-                    <UserTree />
-                </div>
-                <div className="grid-item">
-                    Test
-                </div>
-                <div className="grid-item">
-                    Test
+                    <UserTreeMUI />
                 </div>
             </div>
         </>
