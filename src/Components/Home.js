@@ -1,28 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CardHeader from './CardHeader';
 import { useNavigate } from "react-router-dom";
+import CardFooter from './CardFooter';
+import { Box, Stack, Typography } from '@mui/material';
 import '../App.css';
 import UserTree from './UserTree';
 import UserTreeMUI from './TreeViewMUI';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-
+const ShowTreeComponent = (props) => {
+    debugger;
+    const { children, activeTree, selectedTree } = props;
+    console.log("Active Tree:", activeTree);
+    console.log("Selected Tree:", selectedTree);
+    return (
+        <div hidden={activeTree !== selectedTree}>
+            {activeTree === selectedTree ? (
+                <Box mx={2}>
+                    <Typography variant="h6">Active Tree: {activeTree}</Typography>
+                    {children}
+                </Box>
+            ) : null}
+        </div>
+    );
+}
 function Home() {
+    const [activeTree, setActiveTree] = useState();
     const history = useNavigate();
-    // Sample user data
-    const userList = [
-        { id: 1, name: 'User 1' },
-        { id: 2, name: 'User 2' },
-        {
-            id: 3, name: 'User 3', children: [
-                { id: 4, name: 'Child 1' },
-                { id: 5, name: 'Child 2' }
-            ]
-        },
-        // Add more users as needed
-    ];
+    const [dataFromChild, setDataFromChild] = useState(null);
+    //Callback function to receive data from child
+    const hanleDataFromChild = (data) => {
+        debugger;
+        setDataFromChild(data.name);
+        setActiveTree(data.name);
+    }
 
     return (
         <>
@@ -33,7 +46,18 @@ function Home() {
             </div>
             <div className="flex-container">
                 <div className="grid-item">
-                    <UserTreeMUI />
+                    <UserTreeMUI sendDataToParent={hanleDataFromChild} />
+                </div>
+            </div>
+            <div className="flex-container">
+                <div className="grid-item">
+                    <ShowTreeComponent activeTree={activeTree} selectedTree="Bowling">
+                        {<CardFooter></CardFooter>}
+                    </ShowTreeComponent>
+                    <ShowTreeComponent activeTree={activeTree} selectedTree="Batting">
+                        <CardHeader />
+                    </ShowTreeComponent>
+
                 </div>
             </div>
         </>

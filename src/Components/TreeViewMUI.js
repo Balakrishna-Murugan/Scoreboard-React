@@ -8,78 +8,132 @@ import Login from './Login';
 import CardHeader from './CardHeader';
 import CardFooter from './CardFooter';
 
-// const ShowTreeComponent = (props) => {
-//     debugger;
-//     const { childern, activeTree, selectedTree } = props;
-//     return (
-//         <div hidden={activeTree !== selectedTree}>
-//             {activeTree === selectedTree && <Box mx={2}>{childern}</Box>}
-//         </div>
-//     );
-// }
 
-const ShowTreeComponent = (props) => {
-    debugger;
-    const { children, activeTree, selectedTree } = props;
-    console.log("Active Tree:", activeTree);
-    console.log("Selected Tree:", selectedTree);
+
+
+
+
+const TreeViewComponent = ({ treeJsonData,handleClick }) => {
     return (
-        <div hidden={activeTree !== selectedTree}>
-            {activeTree === selectedTree ? (
-                <Box mx={2}>
-                    <Typography variant="h6">Active Tree: {activeTree}</Typography>
-                    {children}
-                </Box>
-            ) : null}
-        </div>
+        <>
+            {treeJsonData.map(rootNode => (
+                <TreeNodeComponent itemId={rootNode.id} handleClick={handleClick} treeNode={rootNode} label={rootNode.name} onClick={() => handleClick(rootNode)}></TreeNodeComponent>
+            ))}
+        </>
     );
-}
+};
 
-const TreeViewMUI = () => {
+const TreeNodeComponent = ({ treeNode,handleClick }) => {
+   
+    const hasChildren = treeNode.children && treeNode.children
+    return (
+        <>
+            <TreeItem itemId={treeNode.id} label={treeNode.name} onClick={() => handleClick(treeNode)}>
+                {hasChildren && treeNode.children.map(child => (
+                    <TreeItem itemId={child.id} label={child.name} onClick={() => handleClick(child)}>
+                        {child.Grandchildren && child.Grandchildren.map(Grandchildren=>(
+                            <TreeItem itemId={Grandchildren.id} label={Grandchildren.name} onClick={() => handleClick(Grandchildren)}>
+                                </TreeItem>
+                        ))}
+                    </TreeItem>
+                ))}
+            </TreeItem>
+
+        </>
+    );
+};
+
+const TreeViewMUI = ({sendDataToParent}) => {
+    const treeData = [
+        {
+            id: 1,
+            name: 'TNCC',
+            children: [
+                {
+                    id: 2, name: 'Player 1',
+                    Grandchildren: [
+                        { id: 3, name: 'Bowling' },
+                        { id: 4, name: 'Batting' }
+                    ]
+                },
+                { id: 5, name: 'Player 2' }
+            ]
+        },
+        {
+            id: 6,
+            name: 'Demo Team',
+            children: [
+                {
+                    id: 7, name: 'Player 1',
+                    Grandchildren: [
+                        { id: 8, name: 'Bowling' },
+                        { id: 9, name: 'Batting' }
+                    ]
+                },
+                {
+                    id: 10, name: 'Player 2',
+                    Grandchildren: [
+                        { id: 11, name: 'Bowling' },
+                        { id: 12, name: 'Batting' }
+                    ]
+                },
+                {
+                    id: 13, name: 'Player 3',
+                    Grandchildren: [
+                        { id: 14, name: 'Bowling' },
+                        { id: 15, name: 'Batting' }
+                    ]
+                },
+                {
+                    id: 16, name: 'Player 4',
+                    Grandchildren: [
+                        { id: 17, name: 'Bowling' },
+                        { id: 18, name: 'Batting' }
+                    ]
+                },
+                {
+                    id: 19, name: 'Player 4',
+                    Grandchildren: [
+                        { id: 20, name: 'Bowling' },
+                        { id: 21, name: 'Batting' }
+                    ]
+                }
+            ]
+        }
+    ];
     const treeHeading = ["Slider", "Portal", "Stepper", "Modal"];
     const treeSubHeading = ["Slider one", "Portal one", "Stepper one", "Model one"];
     const [activeTree, setActiveTree] = useState();
     const handleClick = (node) => {
         setActiveTree(node);
         console.log(node);
+        sendDataToParent(node);
         //alert(node);
     }
-  
+
     return (
         <Box>
             <Typography variant='h5' color="secondary" align="center">
                 MUI TreeViewMUI
             </Typography>
             <Stack spacing={3} direction="row">
-                <Box width="20%">
+                <Box width="100%">
                     <SimpleTreeView>
                         {
 
-                            treeHeading.map((treeItem, index) => (
-                                <TreeItem itemId={index} label={treeItem}>
-                                    <TreeItem itemId={treeSubHeading[index]} label={treeSubHeading[index]} 
-                                    onClick={() => handleClick(treeSubHeading[index])} />
-                                </TreeItem>
+                            <TreeViewComponent treeJsonData={treeData} handleClick={handleClick}></TreeViewComponent>
+                            // treeHeading.map((treeItem, index) => (
+                            //     <TreeItem itemId={index} label={treeItem}>
+                            //         <TreeItem itemId={treeSubHeading[index]} label={treeSubHeading[index]} 
+                            //         onClick={() => handleClick(treeSubHeading[index])} />
+                            //     </TreeItem>
 
-                            ))
+                            // ))
 
                         }
                     </SimpleTreeView>
                 </Box>
-                <Box width="80%">
-                    <ShowTreeComponent activeTree={activeTree} selectedTree="Slider One">
-                        {/* <Login></Login> */}
-                    </ShowTreeComponent>
-                    <ShowTreeComponent activeTree={activeTree} selectedTree="Portal one">
-                        <CardHeader/>
-                    </ShowTreeComponent>
-                    <ShowTreeComponent activeTree={activeTree} selectedTree="Stepper one">
-                        <CardFooter/>
-                    </ShowTreeComponent>
-                    <ShowTreeComponent activeTree={activeTree} selectedTree="Model One">
-
-                    </ShowTreeComponent>
-                </Box>
+               
             </Stack>
         </Box>
     );
