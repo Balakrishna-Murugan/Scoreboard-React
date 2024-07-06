@@ -1,133 +1,100 @@
 import React, { useState } from 'react';
 import './Login.css';
+import './navMenu.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import CardFooter from './CardFooter';
 import CardHeader from './CardHeader';
+import Registeration from './Registration';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
-import { faUserPlus, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import { faUserPlus, faSignInAlt, faL } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
-    const history = useNavigate();
-    function handleLogin() {
-        // Perform login logic
-        // If login is successful, navigate to home page
-        history('/Components/Home');
+    const navigate = useNavigate();
+
+    function handleLogin(event) {
+        event.preventDefault();
+        // Perform login logic here
+        navigate('/Components/Home');
     };
-    function openSocialLink(url) {
-        // Check if the app is available on the device
+
+    function openSocialLink(platform) {
         const userAgent = navigator.userAgent || navigator.vendor || window.opera;
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
-
-        // Define the app URI scheme for each social media platform
-        const facebookAppURI = 'fb://page/{page-id}';
-        const instagramAppURI = 'instagram://user?username={username}';
-        const twitterAppURI = 'twitter://user?screen_name={username}';
-
-        // Define the URLs for each social media platform
-        const facebookURL = 'https://www.facebook.com/{page-id}';
-        const instagramURL = 'https://www.instagram.com/{username}';
-        const twitterURL = 'https://twitter.com/{username}';
-
-        // Open the app URI if available, otherwise open the URL in a new tab
-        if (isMobile) {
-            let appURI;
-            switch (url) {
-                case 'facebook':
-                    appURI = facebookAppURI;
-                    break;
-                case 'instagram':
-                    appURI = instagramAppURI;
-                    break;
-                case 'twitter':
-                    appURI = twitterAppURI;
-                    break;
-                default:
-                    break;
-            }
-            window.location.href = appURI || url;
-        } else {
-            switch (url) {
-                case 'facebook':
-                    url = facebookURL;
-                    break;
-                case 'instagram':
-                    url = instagramURL;
-                    break;
-                case 'twitter':
-                    url = twitterURL;
-                    break;
-                default:
-                    break
-            }
-
-            window.open(url, '_blank');
-        }
+        const urls = {
+            facebook: isMobile ? 'fb://page/{page-id}' : 'https://www.facebook.com/{page-id}',
+            instagram: isMobile ? 'instagram://user?username={username}' : 'https://www.instagram.com/{username}',
+            twitter: isMobile ? 'twitter://user?screen_name={username}' : 'https://twitter.com/{username}'
+        };
+        window.open(urls[platform], '_blank');
     }
-    const [issignup, setIsSignup] = useState(false);
+    const [showRegister, setshowRegister] =useState(false);
+    const [isSignup, setIsSignup] = useState(false);
+
     function updateSignup() {
-
         setIsSignup(true);
-        console.log(issignup);
     }
-    const [issignin, setIsSignin] = useState(false);
-    function Signin() {
-        setIsSignin(true);
-        setIsSignup(false);
-        console.log(issignin);
-        
-    }
-    return (
-        <div className='main-container'>
-            <div className="flex-container">
-                <div className="grid-item">
-                    <CardHeader></CardHeader>
-                </div>
 
-            </div>
-            <div className='flex-container'>
+    function Signin() {
+        setIsSignup(false);
+    }
+    function handleRegisterClick(e) {
+        e.preventDefault();
+        setshowRegister(true);
+        console.log('Register link clicked');
+    }
+
+    return (
+        
+<div className='main-container'>
+             <CardHeader onRegisterClick={handleRegisterClick} isHome={true} />
+
+             {showRegister ? (<Registeration></Registeration>):(<div style={{ marginTop: '100px', overflowY: 'auto', height: 'calc(100vh - 100px)' }}><div className='flex-container'>
                 <div className='grid-item'>
-                    <div class="p-2">
-                        <button onClick={() => openSocialLink('facebook')} className="btn btn-primary btn-social custom-button"><FontAwesomeIcon icon={faFacebookF} /> <span className='text'> Facebook</span></button>
-                        <button onClick={() => openSocialLink('twitter')} class="btn btn-info btn-social custom-button"><FontAwesomeIcon icon={faTwitter} /> <span className='text'> Twitter</span></button>
-                        <button onClick={() => openSocialLink('instagram')} class="btn btn-danger btn-social custom-button"><FontAwesomeIcon icon={faInstagram} /> <span className='text'> Instagram</span></button>
+                    <div className="p-2">
+                        <button onClick={() => openSocialLink('facebook')} className="btn btn-primary btn-social custom-button">
+                            <FontAwesomeIcon icon={faFacebookF} /> <span className='text'> Facebook</span>
+                        </button>
+                        <button onClick={() => openSocialLink('twitter')} className="btn btn-info btn-social custom-button">
+                            <FontAwesomeIcon icon={faTwitter} /> <span className='text'> Twitter</span>
+                        </button>
+                        <button onClick={() => openSocialLink('instagram')} className="btn btn-danger btn-social custom-button">
+                            <FontAwesomeIcon icon={faInstagram} /> <span className='text'> Instagram</span>
+                        </button>
                     </div>
                 </div>
             </div>
-
             <div className="flex-container">
                 <div className="grid-item">
-                    {/* <div className='container'> */}
-                    {/* <div className='row'> */}
-                    {/* <div className='col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4'></div> */}
-
-                    {issignup ?
-                        // <div className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                    {isSignup ? (
                         <div className='p-2'>
-                            <form>
+                            <form onSubmit={handleLogin}>
                                 <div className="mb-3">
-                                    <label htmlFor="your@email.com" className="form-label">Email</label>
-                                    <input type="text" className="form-control" id="username" placeholder="your@email.com" />
+                                    <label htmlFor="email" className="form-label">Email</label>
+                                    <input type="email" className="form-control" id="email" placeholder="your@email.com" />
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="correct horse battery staple" className="form-label">Password</label>
+                                    <label htmlFor="password" className="form-label">Password</label>
                                     <input type="password" className="form-control" id="password" placeholder="correct horse battery staple" />
                                 </div>
-                                <button id='login-button' type="submit" className="btn btn-primary"><FontAwesomeIcon icon={faUserPlus} /> Create Account</button>
+                                <button id='signup-button' type="submit" className="btn btn-primary">
+                                    <FontAwesomeIcon icon={faUserPlus} /> Create Account
+                                </button>
                                 <div className="mt-3">
-                                    <label htmlFor="terms" className="form-label">By signing up you agree to our
-                                    </label> <span className="link-span">terms of service</span>
+                                    <label className="form-label">By signing up you agree to our</label> 
+                                    <span className="link-span"> terms of service</span>
                                 </div>
-                                <div><label htmlFor="signin" className="form-label">Already have an account?
-                                </label> <span onClick={Signin} className="link-span"> Sign in</span></div>
+                                <div>
+                                    <label className="form-label">Already have an account?</label> 
+                                    <span onClick={Signin} className="link-span"> Sign in</span>
+                                </div>
                             </form>
                         </div>
-                        // </div>
-                        :
-                        // <div className='col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4'>
+                    ) : (
                         <div className='p-2'>
-                            <form>
+                            <form onSubmit={handleLogin}>
                                 <div className="mb-3">
                                     <label htmlFor="username" className="form-label">Username</label>
                                     <input type="text" className="form-control" id="username" placeholder="Enter your username" />
@@ -136,33 +103,33 @@ function Login() {
                                     <label htmlFor="password" className="form-label">Password</label>
                                     <input type="password" className="form-control" id="password" placeholder="Enter your password" />
                                 </div>
-                                <button id='login-button' type="submit" onClick={handleLogin} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Login</button>
+                                <button id='login-button' type="submit" className="btn btn-primary">
+                                    <FontAwesomeIcon icon={faSignInAlt} /> Login
+                                </button>
                                 <div className="mt-3">
-                                    <label htmlFor="signup" className="form-label">Need an account?
-                                    </label> <span onClick={updateSignup} className="link-span">Sign up</span>
+                                    <label className="form-label">Need an account?</label> 
+                                    <span onClick={updateSignup} className="link-span"> Sign up</span>
                                 </div>
-                                <div><label htmlFor="signup" className="form-label">Forgot your password?
-                                </label> <span className="link-span">Reset it</span></div>
+                                <div>
+                                    <label className="form-label">Forgot your password?</label> 
+                                    <span className="link-span"> Reset it</span>
+                                </div>
                             </form>
                         </div>
-                        // </div>
-                    }
-
-                    {/* <div className='col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4'></div> */}
-                    {/* </div> */}
-                    {/* </div> */}
+                    )}
                 </div>
-                <div className="grid-item">
+                <div className='grid-item'>
                     <CardFooter></CardFooter>
                 </div>
             </div>
-
-            {/* <div className="flex-container">
-                <div className="grid-item">
-                    <CardBroadcast></CardBroadcast>
-                </div>
-            </div> */}
+            </div>)}
+            
+               
+              
         </div>
+       
+        
     );
 }
+
 export default Login;

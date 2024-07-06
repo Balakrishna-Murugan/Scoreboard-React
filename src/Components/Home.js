@@ -39,11 +39,10 @@ function Home() {
 
     return (
         <>
-            <div className="flex-container">
-                <div className="grid-item">
-                    <CardHeader isHome={true}></CardHeader>
-                </div>
-            </div>
+            
+                    <CardHeader isHome={true} ></CardHeader>
+              
+           
             <div className="flex-container">
                 <div className="grid-item">
                     <UserTreeMUI sendDataToParent={hanleDataFromChild} />
